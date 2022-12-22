@@ -1,0 +1,10 @@
+logs/
+data/
+**/*/logs/
+**/*/data/
+**/*/__pycache__/
+
+**/*/*.tar
+
+.vscode/
+.idea/
