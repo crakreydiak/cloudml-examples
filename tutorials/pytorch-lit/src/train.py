@@ -2,7 +2,7 @@ import torch
 import pytorch_lightning as pl
 import argparse
 import os
-from models import LitAutoEncoder
+from models import LitMNISTClassifier
 from torch.utils.data import DataLoader
 from pytorch_lightning.loggers import TensorBoardLogger
 from torchvision.datasets.mnist import MNIST
@@ -15,7 +15,6 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--path_to_data", default="./data", type=str)
     parser.add_argument("--num_workers", default=4, type=int)
-    parser.add_argument("--max_epochs", default=5, type=int)
     parser.add_argument("--batch_size", default=32, type=int)
     parser.add_argument("--hidden_dim", default=128, type=int)
     parser.add_argument("--log_dir", default="./logs", type=str)
@@ -50,13 +49,12 @@ def main(
     test_ldr = DataLoader(mnist_test, batch_size=args.batch_size, num_workers=args.num_workers)
 
     # get img size
-    data_sample = next(iter(train_ldr))
-    in_features = data_sample[0].shape[-1]
+    data_sample = next(iter(train_ldr))[0]
+    in_features = data_sample.shape[-1]
 
     # model
-    model = LitAutoEncoder(
-        in_layers=[in_features * in_features, 64, 3],
-        device=device
+    model = LitMNISTClassifier(
+        in_layers=[in_features * in_features, 128, 256, 10],
     )
 
     # trainer
@@ -68,13 +66,13 @@ def main(
     trainer.fit(model, train_ldr, val_ldr)
 
     # test
-    res = trainer.test(test_ldr)
+    res = trainer.test(model, dataloaders=test_ldr)
     print(res)
 
     # save model
     torch.onnx.export(
         model,
-        data_sample,
+        data_sample.view(data_sample.size(0), -1),
         "model_torch_export.onnx",
         export_params=True,
         opset_version=11,
@@ -85,7 +83,6 @@ def main(
             'input' : {0 : 'batch_size'},
             'output' : {0 : 'batch_size'}
         })
-
 
 
 if __name__ == "__main__":
