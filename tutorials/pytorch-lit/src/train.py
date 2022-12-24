@@ -26,11 +26,8 @@ def parse_args():
 def main(
    args
 ):
-    # device
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-
     # logger
-    logger = TensorBoardLogger(save_dir=args.log_dir)
+    tb_logger = TensorBoardLogger(save_dir=args.log_dir)
 
     # data
     dataset = MNIST(
@@ -58,11 +55,7 @@ def main(
     )
 
     # trainer
-    trainer = pl.Trainer(
-        logger=logger,
-        accelerator=device,
-        max_epochs=args.max_epochs,
-    )
+    trainer = pl.Trainer.from_argparse_args(args, logger=tb_logger)
     trainer.fit(model, train_ldr, val_ldr)
 
     # test
