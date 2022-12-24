@@ -1,10 +1,13 @@
-logs/
-data/
-**/*/logs/
-**/*/data/
+# cache & logs
 **/*/__pycache__/
+**/*/logs/
+logs/
 
+# data files
 **/*/*.tar
+data/
+**/*/data/
 
+# IDE files
 .vscode/
 .idea/
