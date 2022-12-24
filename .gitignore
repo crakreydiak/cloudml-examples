@@ -11,3 +11,7 @@ data/
 # IDE files
 .vscode/
 .idea/
+
+# saved models
+*.pkl
+*.onnx
