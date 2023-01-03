@@ -21,4 +21,4 @@ data/
 # environment variables
 .env
 **/*.env
-tutorials/mnist-pytorch/config.json
+**/*/config.json
