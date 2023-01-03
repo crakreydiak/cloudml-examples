@@ -1,14 +1,14 @@
 # Azure Machine Learning examples
-This repository contains simple tutorials to help machine learning developers use Azure Machine Learning services to train models.
+This repository contains simple tutorials to help machine learning developers use AWS SageMaker and Azure Machine Learning services to launch different machine learning tasks. It regroups different resources found across the web (other github repo, blog posts, etc.) in a single repository. 
 
 ## Contents
-| link | description |
-| -         |   -         |
-| [`mnist-pytorch-lit`](tutorials/1_mnist-pytorch-lit/mnist-pytorch-lit.ipynb) | Setup your Azure environment for the first time and then train a MNIST classifier using GPU-accelerated VMs. |
-| [`distributed-cifar10-pytorch`](tutorials/distributed-cifar10-pytorch.ipynb) | After upgrading your quotas, you can take advantage of distributed GPU training using PyTorch. For this tutorial, we train a simple convolutional network on CIFAR10. |
+| link             | description     |
+| -                |   -             |
+| [`aws`](aws)     | AWS tutorials   |
+| [`azure`](azure) | Azure tutorials |
 
 ## References
-Most of the code of the examples is inspired by tutorials offered by Microsoft and the Azure community.
+Most of the code and examples is inspired by existing tutorials.
 
 - [Documentation](https://docs.microsoft.com/azure/machine-learning)
 - [The official AzureML example repository](https://github.com/Azure/azureml-examples)
