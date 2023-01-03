@@ -1,0 +1,27 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: train_cifar_classifier
+display_name: Train CIFAR Classifier
+
+code: ./train-model
+environment: azureml:AzureML-pytorch-1.9-ubuntu18.04-py37-cuda11-gpu:6
+distribution:
+  type: pytorch
+  process_count_per_instance: 1
+resources:
+  instance_count: 2 # > 1 for distributed training 
+
+command: python main.py --path_to_data ${{inputs.path_to_data}} --batch_size ${{inputs.batch_size}} --max_epochs ${{inputs.max_epochs}} --num_workers ${{inputs.num_workers}}
+inputs:
+  path_to_data:
+    type: uri_folder
+  batch_size:
+    type: integer
+  max_epochs:
+    type: integer
+  num_workers:
+    type: integer
+outputs:
+  path_to_model:
+    type: uri_file

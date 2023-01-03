@@ -1,0 +1,2 @@
+# Download data (why use `wget` when you can write something unnecessarily complex?)
+Invoke-WebRequest -Uri https://azuremlexamples.blob.core.windows.net/datasets/cifar-10-python.tar.gz -Out cifar-10-python.tar.gz
