@@ -4,9 +4,10 @@
 logs/
 
 # data files
-**/*/*.tar
+*.tar
 data/
 **/*/data/
+*.tar.gz
 
 # IDE files
 .vscode/
