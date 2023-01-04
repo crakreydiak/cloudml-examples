@@ -12,9 +12,9 @@ resources:
   instance_count: 1
 environment: azureml:AzureML-pytorch-1.9-ubuntu18.04-py37-cuda11-gpu:6
 
-command: python main.py --data-dir ${{inputs.cifar}} --path_to_model ${{inputs.path_to_model}}
+command: python main.py --path_to_data ${{inputs.cifar}} --path_to_model ${{inputs.model_dir}}/model.pt
 inputs:
   cifar:
     type: uri_folder
-  path_to_model:
-    type: uri_file
+  model_dir:
+    type: uri_folder

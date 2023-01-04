@@ -10,9 +10,9 @@ distribution:
   type: pytorch
   process_count_per_instance: 1
 resources:
-  instance_count: 2 # > 1 for distributed training 
+  instance_count: 1 # > 1 for distributed training 
 
-command: python main.py --path_to_data ${{inputs.path_to_data}} --batch_size ${{inputs.batch_size}} --max_epochs ${{inputs.max_epochs}} --num_workers ${{inputs.num_workers}}
+command: python main.py --path_to_data ${{inputs.path_to_data}} --batch_size ${{inputs.batch_size}} --max_epochs ${{inputs.max_epochs}} --num_workers ${{inputs.num_workers}} --model_dir ${{outputs.model_dir}}
 inputs:
   path_to_data:
     type: uri_folder
@@ -23,5 +23,5 @@ inputs:
   num_workers:
     type: integer
 outputs:
-  path_to_model:
-    type: uri_file
+  model_dir:
+    type: uri_folder
